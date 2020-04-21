@@ -17,11 +17,13 @@ app.post("/repositories", (request, response) => {
 
   //criando o repositório
   const repository = {
+    
     id: uuid(),
     title,
     url,
     techs,
     likes: 0,
+    
   };
 
   repositories.push(repository);

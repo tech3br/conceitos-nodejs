@@ -48,11 +48,11 @@ app.put("/repositories/:id", (request, response) => {
 
   //se o índice do repositório for igual a -1 retorna uma resposta de erro
   if(findRepositoryIndex == -1){
-    return response.status(400).json({ error: 'Repository does not exists.' });
+    return response.status(400).json({ error: 'Este repositório não existe.' });
   };
 
   const repository = {
-    id,
+    id, 
     title,
     url,
     techs,
@@ -76,10 +76,10 @@ app.delete("/repositories/:id", (request, response) => {
   if (findRepositoryIndex >= 0) {
     repositories.splice(findRepositoryIndex, 1);
   } else {
-    return response.status(400).json({ error: "Repository does not exist" });
+    return response.status(400).json({ error: "Este repositório não existe." });
   }
 
-  return response.status(204).send();
+  return response.status(204).json(repositories);
 });
 
 //rota para inserir um like pelo método POST pois está incrementando e não alterando a quantidade de likes
@@ -89,7 +89,7 @@ app.post("/repositories/:id/like", (request, response) => {
   const repository = repositories.find((repository) => repository.id == id);
 
   if (!repository) {
-    return response.status(400).send();
+    return response.status(400).send('Repositório não existe!');
   }
 
   repository.likes += 1;
